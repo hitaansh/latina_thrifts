@@ -26,13 +26,31 @@ class Functions:
     
     def check_exists_by_xpath(self, xpath):                                               
         try:                                                                        
-            driver.find_element_by_xpath(xpath)                                     
+            self.driver.find_element_by_xpath(xpath)                                     
         except NoSuchElementException:                                              
             return False                                                            
         return True
 
+    def click_button(self, path):
+        button = self.driver.find_element(By.XPATH, path)
+        button.click()
+
     def load_more(self, path):
-        return
+        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+        load_more = self.wait.until(EC.element_to_be_clickable((By.XPATH, path)))
+        load_more.click()
+        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+        time.sleep(2)
+
+    def press_product(self, path):
+        product = self.wait.until(EC.element_to_be_clickable((By.XPATH, path)))
+        product.click()
+        time.sleep(1)
+
+        
+
+    def back(self):
+        self.driver.back()
 
     def quit_driver(self):
         self.driver.quit()

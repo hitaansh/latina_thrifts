@@ -7,7 +7,7 @@ const pool = new Pool({
   password: process.env.pass,
   host: process.env.hostname,
   port: process.env.port_id,
-  database: "depop"
+  database: process.env.database
 })
 
 module.exports = pool
